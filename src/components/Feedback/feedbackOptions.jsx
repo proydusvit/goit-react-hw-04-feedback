@@ -6,7 +6,8 @@ const FeedBackOptions = ({ options, onLeaveFeedback }) => {
        <Section title="Please leave feedback">
     <div>
       {options.map(option => (
-        <button
+          <button
+              className={style.button}
           key={option}
           type="button"
           label={option}
