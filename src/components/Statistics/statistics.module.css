@@ -1,7 +1,14 @@
 .list{
     list-style-type: none;
+  
 }
 li{
     margin-bottom: 10px;
     font-size: 50px;
+}
+.list__green{
+    color:green;
+}
+.list__tomato {
+    color: tomato;
 }
