@@ -1,6 +1,7 @@
 import Section from "components/Section/sections";
 import Notification from "components/Notification/Notification";
-import styles from "components/Statistics/statistics.module.css"
+import styles from "components/Statistics/statistics.module.css";
+import PropTypes from 'prop-types';
 const Statistics = ({ good, neutral, bad, total, positivePercentage }) => (
   <Section title="Statistics">
     {!total ? (
@@ -17,3 +18,10 @@ const Statistics = ({ good, neutral, bad, total, positivePercentage }) => (
     </Section>
 )
 export default Statistics;
+Statistics.propTypes = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
+}
