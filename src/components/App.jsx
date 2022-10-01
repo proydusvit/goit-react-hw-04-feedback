@@ -1,41 +1,48 @@
-import React, { Component } from "react";
+import React from "react";
 import Statistics from "./Statistics/statistics";
 import FeedBackOptions from "./Feedback/feedbackOptions";
+  import { useState } from 'react';
+
+function App() {
+  const [good, setGood] = useState(0);
+  const [bad, setBad] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+
+ 
+  const onLeaveFeedback = voteName => {
+    switch (voteName) {
+      case 'good':
+        setGood(good + 1);
+        break;
+      case 'bad':
+        setBad(bad + 1);
+        break;
+      case 'neutral':
+        setNeutral(neutral + 1);
+        break;
+   }
+
+ }
   
-class App extends Component {
-     state = {
-  good: 0,
-  neutral: 0,
-  bad: 0
-  }
-onLeaveFeedback = (propertyName) => {
-  this.setState((prevState)  => {
-const value = prevState[propertyName];
- return {
-      [propertyName]: value + 1
-    }
-  })
-}
-  
-countTotalFeedback() {
-  const { good, neutral, bad } = this.state;
+const countTotalFeedback = () => {
         return good + neutral + bad;
 }
   
-countPositiveFeedbackPercentage() {
- const total = this.countTotalFeedback();
+ const countPositiveFeedbackPercentage = () => {
+ const total = countTotalFeedback();
   if (!total) {
             return 0;
         }
-  return Math.round(this.state.good / this.countTotalFeedback() * 100);
+  return Math.round(good / countTotalFeedback() * 100);
     
 }
 
-  render() {
-      const { good, neutral, bad } = this.state;
-        const total = this.countTotalFeedback();
-        const positivePercentage = this.countPositiveFeedbackPercentage();
-    return <div
+  
+   
+const total = countTotalFeedback();
+const positivePercentage = countPositiveFeedbackPercentage();
+  
+    return( <div
        style={{
         height: '100vh',
         display: 'flex',
@@ -46,12 +53,12 @@ countPositiveFeedbackPercentage() {
       }}
     >
 <div>
-<FeedBackOptions options={[ 'good', 'neutral', 'bad']} onLeaveFeedback={this.onLeaveFeedback}/>
+<FeedBackOptions options={[ 'good', 'neutral', 'bad']} onLeaveFeedback={onLeaveFeedback}/>
 <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage ={positivePercentage} />
          
       </div>
          </div>
-    }
-
+    
+    )
 };
 export default App;
